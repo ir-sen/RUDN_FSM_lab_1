@@ -1,6 +1,6 @@
 package lab1_2;
 
-import java.util.Iterator;
+import java.util.*;
 
 
 class Tiger {
@@ -149,10 +149,12 @@ public class TwoDIteratorTest {
         //new TwoDIteratorTest().test();
         int[][] matrix = {
                 {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,1,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,2,0,0,0,0},
+                {0,0,0,0,2,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
         };
+
+        Tiger t1 = new Tiger();
 
         final int minX = 0;
         final int minY = 0;
@@ -163,13 +165,18 @@ public class TwoDIteratorTest {
         for (Direction d : Direction.values()) {
             System.out.print(d + " - ");
             for(Point p : new TwoDIterator(1, 4, d, minX, minY, maxX, maxY)) {
-                System.out.print(p + "   ");
+                if (matrix[p.x][p.y] == 2) {
+                    System.out.println("_--------------______-----____---- ATTTACK === + " );
+                }
                 System.out.print( "X= " +p.x +" Y= " + p.y );
-                System.out.print("   ");
+
+
 
             };
             System.out.println();
         }
+
+
 
 
 
