@@ -2,6 +2,21 @@ package lab1_2;
 
 import java.util.Iterator;
 
+
+class Tiger {
+
+    static private int state = 3;
+    static private String status = "searchForPrey";
+
+    final private String searchForPreyState = "searchForPrey";
+    final private String goHome = "goHome";
+    final private String attackState = "attack";
+    final private String runAway = "runAway";
+    final private String hontDownPrey = "finish";
+
+
+}
+
 public class TwoDIteratorTest {
 
     // An ubiquitous Point class
@@ -18,18 +33,26 @@ public class TwoDIteratorTest {
         public String toString() {
             return "{" + x + "," + y + "}";
         }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
     }
 
     // All possible directions.
     enum Direction {
-        North(0, 1),
-        NorthEast(1, 1),
-        East(1, 0),
-        SouthEast(1, -1),
-        South(0, -1),
-        SouthWest(-1, -1),
-        West(-1, 0),
-        NorthWest(-1, 1);
+        Right(0, 1),
+        DownRight(1, 1),
+        Down(1, 0),
+        DownLeft(1, -1),
+        Left(0, -1),
+        UpLeft(-1, -1),
+        Up(-1, 0),
+        UpRight(-1, 1);
         private final int dx;
         private final int dy;
 
@@ -123,16 +146,32 @@ public class TwoDIteratorTest {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new TwoDIteratorTest().test();
+        //new TwoDIteratorTest().test();
         int[][] matrix = {
                 {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,1,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
         };
-        Direction direct;
+
+        final int minX = 0;
+        final int minY = 0;
+        final int maxX = matrix.length-1;
+        final int maxY = matrix[0].length-1;
+
+
         for (Direction d : Direction.values()) {
-            new TwoDIterator(1, 4, d, -matrix[0].length, -matrix.length, matrix[0].length, matrix.length);
+            System.out.print(d + " - ");
+            for(Point p : new TwoDIterator(1, 4, d, minX, minY, maxX, maxY)) {
+                System.out.print(p + "   ");
+                System.out.print( "X= " +p.x +" Y= " + p.y );
+                System.out.print("   ");
+
+            };
+            System.out.println();
         }
+
+
+
     }
 }
